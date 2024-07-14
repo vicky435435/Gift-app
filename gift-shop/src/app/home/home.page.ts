@@ -1,30 +1,42 @@
-import { Component, inject } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonCol, IonThumbnail, IonImg, IonCard, IonLabel, IonText, IonIcon, IonSearchbar } from '@ionic/angular/standalone';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonCol, IonThumbnail, IonImg, IonCard, IonLabel, IonText, IonIcon, IonSearchbar, IonButtons, IonBadge, IonButton } from '@ionic/angular/standalone';
 import { ApiService } from '../services/api/api.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { RouterLink } from '@angular/router';
+import { CartService } from '../services/cart/cart.service';
+import { cart } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonSearchbar, IonIcon, IonText, IonLabel, IonCard, IonImg, IonCol, IonRow, IonHeader, IonToolbar, IonTitle, IonContent, IonThumbnail],
+  imports: [IonButton, IonBadge, IonButtons, IonSearchbar, IonIcon, IonText, IonLabel, IonCard, IonImg, IonCol, IonRow, IonHeader, IonToolbar, IonTitle, IonContent, IonThumbnail,RouterLink],
 })
-export class HomePage {
+export class HomePage implements OnInit, OnDestroy{
   constructor() {}
+
+
   
   ngOnInit() {
     console.log('working llll')
    this.getItems() 
+
+   this.cartSub = this.cartService.cart.subscribe({
+    next : (cart) =>{
+      this.totalItems = cart ? cart?.totalItems :0;
+    }
+   })
   }
 
+ 
   items : any[] = [];
   allItems: any[] = [];
   query!: string;
   totalItems = 0;
   cartSub!: Subscription;
   private api = inject(ApiService)
-
+  private cartService = inject(CartService)
   getItems(){
     this.allItems = this.api.gifts;
     this.items = [...this.allItems];
@@ -51,5 +63,8 @@ export class HomePage {
     );
   }
 
+  ngOnDestroy(): void {
+    if(this.cartSub) this.cartSub.unsubscribe();
+}
 
 }

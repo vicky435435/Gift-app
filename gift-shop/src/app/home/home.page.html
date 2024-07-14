@@ -3,6 +3,21 @@
     <ion-title>
       Gift Shops
     </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" 
+      color="primary"
+      >
+      <ion-icon name="bag-handle" slot="icon-only"></ion-icon>
+       @if(totalItems > 0 ){
+         <ion-badge color="primary">
+           <ion-text>
+             {{totalItems}}
+           </ion-text>
+         </ion-badge>
+       }
+      </ion-button>
+   </ion-buttons>
   </ion-toolbar>
 
   <ion-toolbar>
@@ -24,7 +39,7 @@
   <ion-row>
     @for(item of items; track i;  let i = $index) {
       <ion-col sizeLg="3" sizeMd="4" sizeSm="6" sizeXl="3" sizeXs="6">
-        <ion-card>
+        <ion-card [routerLink]="['/', 'home', 'gifts', item?.id]">
           <ion-thumbnail>
             <ion-img [src]="item?.cover"></ion-img>
            </ion-thumbnail>
