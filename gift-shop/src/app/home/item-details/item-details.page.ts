@@ -7,12 +7,13 @@ import { NavController} from '@ionic/angular/standalone'
 import { ApiService } from 'src/app/services/api/api.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-item-details',
   templateUrl: './item-details.page.html',
   styleUrls: ['./item-details.page.scss'],
   standalone: true,
-  imports: [IonBadge, IonButton, IonFooter, IonText, IonLabel, IonItem, IonIcon, IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonBadge, IonButton, IonFooter, IonText, IonLabel, IonItem, IonIcon, IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, RouterLink]
 })
 export class ItemDetailsPage implements OnInit, OnDestroy{
   id!: string;

@@ -8,6 +8,7 @@
 
     <ion-buttons slot="end">
        <ion-button fill="clear" size="large" color="light"
+       [routerLink]="['/', 'home', 'gifts', item?.id, 'cart']"
        >
        <ion-icon name="bag-handle" slot="icon-only"></ion-icon>
         @if(totalItems > 0 ){

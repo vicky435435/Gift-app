@@ -9,8 +9,22 @@ export const routes: Routes = [
         loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
       },
       {
+        path: 'cart',
+        loadComponent: () => import('./home/cart/cart.page').then( m => m.CartPage)
+      },
+      {
         path: 'gifts/:id',
-        loadComponent: () => import('./home/item-details/item-details.page').then( m => m.ItemDetailsPage)
+        children : [
+          {
+            path : '',
+            loadComponent: () => import('./home/item-details/item-details.page').then( m => m.ItemDetailsPage)
+          },
+          {
+            path: 'cart',
+            loadComponent: () => import('./home/cart/cart.page').then( m => m.CartPage)
+          },
+        ],
+        //loadComponent: () => import('./home/item-details/item-details.page').then( m => m.ItemDetailsPage)
       },
     ],
   },

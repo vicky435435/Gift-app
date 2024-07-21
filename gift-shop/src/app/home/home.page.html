@@ -1,12 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Gift Shops
+      <img src="../../assets/artful-gifts-high-resolution-logo.png" alt="Gift Shop Logo" style="height: 50px; vertical-align: middle; margin-right: 10px; border-radius: 50%;" onclick="location.reload();">
     </ion-title>
 
     <ion-buttons slot="end">
       <ion-button fill="clear" 
       color="primary"
+      [routerLink]="['/', 'home', 'cart']"
       >
       <ion-icon name="bag-handle" slot="icon-only"></ion-icon>
        @if(totalItems > 0 ){
