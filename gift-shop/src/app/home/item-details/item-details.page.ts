@@ -24,7 +24,7 @@ export class ItemDetailsPage implements OnInit, OnDestroy{
   private route = inject(ActivatedRoute);
   private navCtrl = inject(NavController)
   private api = inject(ApiService);
-  private cartService = inject(CartService)
+  public cartService = inject(CartService)
 
   constructor() { }
 
@@ -35,12 +35,12 @@ export class ItemDetailsPage implements OnInit, OnDestroy{
 
   this.cartSub = this.cartService.cart.subscribe({
     next : (cart) =>{
-      this.totalItems = cart ? cart?.totalItems :0;
+      this.totalItems = cart ? cart?.totalItem:0;
     }
    })
   }
   
-  getItem(){
+ async getItem(){
     const id = this.route.snapshot.paramMap.get('id');
     console.log("item", id)
     if(!id || id == '0'){
@@ -56,6 +56,7 @@ export class ItemDetailsPage implements OnInit, OnDestroy{
   }
 
   addItem(){
+    const item = {...this.item}
     const result  = this.cartService.addQuantity(this.item)
     this.addedText();
   }

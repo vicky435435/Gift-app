@@ -24,7 +24,7 @@ export class HomePage implements OnInit, OnDestroy{
 
    this.cartSub = this.cartService.cart.subscribe({
     next : (cart) =>{
-      this.totalItems = cart ? cart?.totalItems :0;
+      this.totalItems = cart ? cart?.totalItem :0;
     }
    })
   }
@@ -36,7 +36,7 @@ export class HomePage implements OnInit, OnDestroy{
   totalItems = 0;
   cartSub!: Subscription;
   private api = inject(ApiService)
-  private cartService = inject(CartService)
+  public cartService = inject(CartService)
   getItems(){
     this.allItems = this.api.gifts;
     this.items = [...this.allItems];
